@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dohko="http://www.dohko.cn/schema/dohko"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.dohko.cn/schema/dohko http://www.dohko.cn/schema/dohko.xsd">
+
+	<dohko:filter uri="/base/city/list" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.BaseCityMapper"/>
+			<dohko:data key="method" value="queryLst"/>
+			<dohko:data key="isActive" value="1"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/base/area/list" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="cityCode" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.BaseAreaMapper"/>
+			<dohko:data key="method" value="queryLst"/>
+			<dohko:data key="isActive" value="1"/>
+		</dohko:request>
+	</dohko:filter>
+
+</beans>

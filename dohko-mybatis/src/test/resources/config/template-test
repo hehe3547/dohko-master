@@ -1,0 +1,32 @@
+package com.${pName}.app.${appName}.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import com.${pName}.core.base.DataMap;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(ServiceTestApplication.class)
+public class $testName {
+
+	private Logger logger = LoggerFactory.getLogger($testName.class);
+
+    private String serviceName = "core_execSimpleMapper";
+    private String mapperName = $testName.class.getName();
+
+    @Test
+    public void addTest() {
+        DataMap dataMap = DataMap.Builder.create().put("mapper", mapperName);
+        dataMap.put("method", "add");
+        ResultInfo resultInfo = Client.Builder.execute(serviceName, dataMap);
+        LogUtils.info(resultInfo, logger);
+    }
+    @Test
+    public void queryLstTest() {
+        DataMap dataMap = DataMap.Builder.create().put("mapper", mapperName);
+        dataMap.put("method", "queryLst");
+        DataMap resultInfo = Client.Builder.execute(serviceName, dataMap);
+        LogUtils.info(resultInfo, logger);
+    }
+	
+}

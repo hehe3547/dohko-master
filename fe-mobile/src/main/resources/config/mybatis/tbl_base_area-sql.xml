@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dohko.app.blxq.mapper.BaseAreaMapper">
+	<insert id="add" parameterType="com.dohko.core.base.DataMap">
+		insert into tbl_base_area (
+<if test="itemID !=null">itemID,</if><if test="cityCode !=null">cityCode,</if><if test="areaCode !=null">areaCode,</if><if test="areaName !=null">areaName,</if><if test="isActive !=null">isActive</if>
+		) values (
+<if test="itemID !=null">#{itemID},</if><if test="cityCode !=null">#{cityCode},</if><if test="areaCode !=null">#{areaCode},</if><if test="areaName !=null">#{areaName},</if><if test="isActive !=null">#{isActive}</if>
+		)
+	</insert>
+
+	<update id="update" parameterType="com.dohko.core.base.DataMap">
+		update tbl_base_area set 
+<if test="itemID !=null">itemID=#{itemID},</if><if test="cityCode !=null">cityCode=#{cityCode},</if><if test="areaCode !=null">areaCode=#{areaCode},</if><if test="areaName !=null">areaName=#{areaName},</if><if test="isActive !=null">isActive=#{isActive}</if>
+	</update>
+	
+	<select id="queryByBaseCode" parameterType="java.lang.String" resultType="com.dohko.core.base.DataMap">
+		select 
+		<include refid="queryFieldSql"/>
+		from tbl_base_area
+		where BaseCode = #{BaseCode}
+	</select>
+
+	<select id="queryLst" parameterType="com.dohko.core.base.DataMap" resultType="com.dohko.core.base.DataMap">
+		select 
+		<include refid="queryFieldSql"/>
+		from tbl_base_area
+		where cityCode = #{cityCode}
+		<include refid="queryWhereSql"/>
+		<if test="pageOffset != null and pageSize != null">LIMIT #{pageOffset}, #{pageSize}</if>
+	</select>
+
+	<select id="queryCount" parameterType="com.dohko.core.base.DataMap" resultType="java.lang.Integer">
+		select count(*) from tbl_base_area
+
+		<include refid="queryWhereSql"/>
+	</select>
+
+	<sql id="queryWhereSql">
+
+	</sql>
+
+	<sql id="queryFieldSql">
+ itemID,  cityCode,  areaCode,  areaName,  isActive 
+	</sql>
+</mapper>

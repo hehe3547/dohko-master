@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="springContextHolder" class="com.dld.platform.context.ContextBeanFactory" />
+	<bean id="platform_transactionInterceptor" class="com.dld.platform.service.aop.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="platform_txManager"></property>
+	</bean>
+	<bean id="platform_dataSourceInterceptor" class="com.dld.platform.service.aop.interceptor.DataSourceInterceptor"/>
+	
+	<bean id="platform_component" class="org.springframework.aop.framework.ProxyFactoryBean">
+	  	<property name="proxyInterfaces">
+    		<value>com.dld.platform.service.esb.ServiceComponent</value>
+  		</property>
+  		<property name="interceptorNames">
+    		<list>
+    			<value>platform_exceptionInterceptor</value>
+    			<value>platform_validatorInterceptor</value>
+    			<value>platform_dataSourceInterceptor</value>
+    			<value>platform_transactionInterceptor</value>
+    		</list>
+  		</property>
+  		<property name="target">
+   		 	<bean class="com.dld.platform.service.esb.support.ServiceComponentSupport"/>
+  		</property>
+	</bean>
+
+	<bean id="platform_validatorInterceptor" class="com.dld.platform.service.aop.interceptor.ValidatorInterceptor" p:serviceValidator-ref="serviceValidator"></bean>
+	<bean id="platform_exceptionInterceptor" class="com.dld.platform.service.aop.interceptor.ExceptionInterceptor"></bean>
+
+	<bean id="serviceValidator" class="com.dld.platform.service.validator.support.ServiceParamsValidatorSupport" init-method="init"/>
+
+	<bean id="platform_nativeClientApp" class="com.dld.platform.service.nativeclient.NativeServiceClient">
+		<property name="component" ref="platform_component"></property>
+	</bean>
+
+	<bean id="platform_serviceLock" class="com.dld.platform.service.lock.support.RedisServiceLock"/>
+
+	<bean id="platform_responsePreProcess" class="com.dld.platform.service.esb.support.ResponsePreProcessSupport"/>
+</beans>

@@ -1,0 +1,24 @@
+server:
+  port: 50001
+  group: app_mxb
+registry:
+  address: 127.0.0.1:2181
+  connTimeout: 60000
+datasource:
+  url: jdbc:mysql://mu.mysql.001.master.hualala.com:3306/db_cservice?autoReconnect=true&amp;autoReconnectForPools=true&amp;failOverReadOnly=false
+  user: myservicedev
+  password: mydev@pwd
+  minIdle: 2
+  maxActive: 10
+  maxIdle: 2
+  initialSize: 2
+mybatis:
+  mapper:
+
+client:
+  servers:
+  services:
+  groups: be-cservice
+
+web:
+  welcome: index

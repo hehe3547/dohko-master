@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dohko="http://www.dohko.cn/schema/dohko"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.dohko.cn/schema/dohko http://www.dohko.cn/schema/dohko.xsd">
+
+	<dohko:event service="core_eventService" type="response" result="success">
+		<dohko:request>
+			<dohko:data key="kaas" value="11"/>
+			<dohko:data key="a" value="2" type="int"/>
+			<dohko:data key="b" value="3"/>
+			<dohko:data key="c" value="4"/>
+			<dohko:data key="d" value="5"/>
+		</dohko:request>
+	</dohko:event>
+
+	<dohko:filter uri="/base/simple.htm" result="true">
+		<dohko:response>
+			<dohko:data key="kaaa" value="11"/>
+			<dohko:data key="a" value="2" type="int"/>
+			<dohko:data key="b" value="3"/>
+			<dohko:data key="c" value="4"/>
+			<dohko:data key="d" value="5"/>
+			<dohko:data key="foodList">
+				<dohko:map>
+					<dohko:data key="c" value="4"/>
+					<dohko:data key="d" value="5"/>
+					<dohko:data key="unit">
+						<dohko:list count="2">
+							<dohko:data key="unit1" expression="#index"></dohko:data>
+							<dohko:data key="unit2" value="20160501121212" type="date" pattern="yyyy-MM-dd"></dohko:data>
+							<dohko:data key="unit3" value="1" type="decimal" pattern="##.##"/>
+						</dohko:list>
+					</dohko:data>
+				</dohko:map>
+			</dohko:data>
+			<dohko:data key="orderDetail">
+				<dohko:list count="5">
+					<dohko:data key="kaaa" expression="#index"></dohko:data>
+					<dohko:data key="b" value="20160501121212" type="date" pattern="yyyy-MM-dd"></dohko:data>
+					<dohko:data key="c" value="1" type="decimal" pattern="##.##"/>
+				</dohko:list>
+			</dohko:data>
+		</dohko:response>
+	</dohko:filter>
+</beans>
+
+<!-- class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" -->

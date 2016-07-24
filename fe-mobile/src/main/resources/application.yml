@@ -1,0 +1,30 @@
+registry:
+  address: 172.16.2.64:2181
+  connTimeout: 60000
+client:
+  servers: localhost:60008
+  services:
+  groups: core;shop
+web:
+  welcome: login
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+server:
+  port: 60008
+  group: be-service
+datasource:
+  url: jdbc:mysql://101.201.237.113:3306/db_dohko?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&amp;autoReconnectForPools=true&amp;failOverReadOnly=false
+  user: dohko
+  password: 123456
+  minIdle: 2
+  maxActive: 10
+  maxIdle: 2
+  initialSize: 2

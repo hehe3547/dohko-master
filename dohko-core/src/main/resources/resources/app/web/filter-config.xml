@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dohko="http://www.dohko.cn/schema/dohko"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.dohko.com/schema/dohko http://www.dohko.cn/schema/dohko.xsd">
+
+	<bean
+			class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+						class="com.dohko.core.web.DatasetMessageConverter">
+					<property name="supportedMediaTypes" value="application/json" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<dohko:filter id="/aa/aabb/acc.htm" service="my_simpleService" req-data="my_dataset" res-data="my_dataset"/>
+
+	<dohko:dataset id="my_dataset">
+		<dohko:props>
+			<dohko:data key="kaaa"/>
+			<dohko:data key="a"/>
+			<dohko:data key="b"/>
+			<dohko:data key="c"/>
+			<dohko:data key="d"/>
+		</dohko:props>
+		<dohko:records>
+			<dohko:data key="kaaa"></dohko:data>
+		</dohko:records>
+		<dohko:records key="foodList">
+			<dohko:data key="kaaa"></dohko:data>
+			<dohko:data key="ka1a"></dohko:data>
+		</dohko:records>
+	</dohko:dataset>
+</beans>
+
+<!-- class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" -->

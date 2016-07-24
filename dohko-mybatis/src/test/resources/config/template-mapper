@@ -1,0 +1,20 @@
+package com.${pName}.app.${appName}.mapper;
+
+import java.util.List;
+import java.util.Map;
+
+import com.${pName}.core.base.DataMap;
+
+public interface $mapperName {
+
+	List<DataMap> queryLst(DataMap params);
+	
+	int queryCount(DataMap params);
+	
+	void add(DataMap params);
+	
+	void update(DataMap params);
+	
+	DataMap queryBy${queryByPKEnd}(String ${queryByPKEnd});
+	
+}

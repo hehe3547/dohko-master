@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dohko.app.blxq.mapper.ShopGoodMapper">
+	<insert id="add" parameterType="com.dohko.core.base.DataMap">
+		insert into tbl_shop_good (
+<if test="itemID !=null">itemID,</if><if test="goodCode !=null">goodCode,</if><if test="goodName !=null">goodName,</if><if test="shopID !=null">shopID,</if><if test="categoryCode !=null">categoryCode,</if><if test="goodImage !=null">goodImage,</if><if test="price !=null">price,</if><if test="prePrice !=null">prePrice,</if><if test="action !=null">action,</if><if test="actionTime !=null">actionTime,</if><if test="createTime !=null">createTime</if>
+		) values (
+<if test="itemID !=null">#{itemID},</if><if test="goodCode !=null">#{goodCode},</if><if test="goodName !=null">#{goodName},</if><if test="shopID !=null">#{shopID},</if><if test="categoryCode !=null">#{categoryCode},</if><if test="goodImage !=null">#{goodImage},</if><if test="price !=null">#{price},</if><if test="prePrice !=null">#{prePrice},</if><if test="action !=null">#{action},</if><if test="actionTime !=null">#{actionTime},</if><if test="createTime !=null">#{createTime}</if>
+		)
+	</insert>
+
+	<update id="update" parameterType="com.dohko.core.base.DataMap">
+		update tbl_shop_good set 
+<if test="itemID !=null">itemID=#{itemID},</if><if test="goodCode !=null">goodCode=#{goodCode},</if><if test="goodName !=null">goodName=#{goodName},</if><if test="shopID !=null">shopID=#{shopID},</if><if test="categoryCode !=null">categoryCode=#{categoryCode},</if><if test="goodImage !=null">goodImage=#{goodImage},</if><if test="price !=null">price=#{price},</if><if test="prePrice !=null">prePrice=#{prePrice},</if><if test="action !=null">action=#{action},</if><if test="actionTime !=null">actionTime=#{actionTime},</if><if test="createTime !=null">createTime=#{createTime}</if>
+	</update>
+	
+	<select id="queryByShopCode" parameterType="java.lang.String" resultType="com.dohko.core.base.DataMap">
+		select 
+		<include refid="queryFieldSql"/>
+		from tbl_shop_good
+		where ShopCode = #{ShopCode}
+	</select>
+
+	<select id="queryLst" parameterType="com.dohko.core.base.DataMap" resultType="com.dohko.core.base.DataMap">
+		select 
+		<include refid="queryFieldSql"/>
+		from tbl_shop_good
+		<include refid="queryWhereSql"/>
+		<if test="pageOffset != null and pageSize != null">LIMIT #{pageOffset}, #{pageSize}</if>
+	</select>
+
+	<select id="queryCount" parameterType="com.dohko.core.base.DataMap" resultType="java.lang.Integer">
+		select count(*) from tbl_shop_good
+		<include refid="queryWhereSql"/>
+	</select>
+
+	<sql id="queryWhereSql">
+	</sql>
+
+	<sql id="queryFieldSql">
+ itemID,  goodCode,  goodName,  shopID,  categoryCode,  goodImage,  price,  prePrice,  action,  actionTime,   createTime 
+	</sql>
+</mapper>

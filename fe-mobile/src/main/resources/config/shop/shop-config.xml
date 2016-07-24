@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dohko="http://www.dohko.cn/schema/dohko"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.dohko.cn/schema/dohko http://www.dohko.cn/schema/dohko.xsd">
+
+	<!--店铺基本信息-->
+	<dohko:filter uri="/shop/open/submit" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopCode" rule="required"/>
+			<dohko:param key="shopName" rule="required"/>
+			<dohko:param key="cityCode" rule="required"/>
+			<dohko:param key="areaCode" rule="required"/>
+			<dohko:param key="address" rule="required"/>
+			<dohko:param key="linkman" rule="required"/>
+			<dohko:param key="tell" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopBaseInfoMapper"/>
+			<dohko:data key="method" value="add"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/submit/status" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopCode" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopBaseInfoMapper"/>
+			<dohko:data key="method" value="queryByShopCode"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/info/get" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopBaseInfoMapper"/>
+			<dohko:data key="method" value="queryByID"/>
+			<dohko:data key="param" value="java.lang.String"/>
+			<dohko:data key="paramKey" value="shopID"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/category/list" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopCategoryMapper"/>
+			<dohko:data key="method" value="queryLst"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/category/add" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopCategoryMapper"/>
+			<dohko:data key="method" value="add"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/category/update" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopCategoryMapper"/>
+			<dohko:data key="method" value="update"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/category/delete" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopCategoryMapper"/>
+			<dohko:data key="method" value="delete"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/good/list" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopGoodMapper"/>
+			<dohko:data key="method" value="queryLst"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/good/add" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopGoodMapper"/>
+			<dohko:data key="method" value="add"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/good/update" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopGoodMapper"/>
+			<dohko:data key="method" value="update"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/shop/good/delete" service="core_execSimpleMapper">
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.ShopGoodMapper"/>
+			<dohko:data key="method" value="delete"/>
+		</dohko:request>
+	</dohko:filter>
+</beans>

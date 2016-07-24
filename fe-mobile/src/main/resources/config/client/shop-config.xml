@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dohko="http://www.dohko.cn/schema/dohko"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.dohko.cn/schema/dohko http://www.dohko.cn/schema/dohko.xsd">
+
+	<!--店铺货品信息-->
+	<dohko:filter uri="/user/shop/index" service="shop_queryShopGoodInfo">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+		</dohko:validate>
+	</dohko:filter>
+</beans>

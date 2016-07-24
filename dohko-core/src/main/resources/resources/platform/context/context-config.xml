@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  
+  
+  	<bean id="springContextHolder" class="com.dld.platform.context.ContextBeanFactory" />
+	
+	<bean id="platform_propertyConfigurer" class="com.dld.platform.extend.ExtendedPropertyPlaceholderConfigurer">
+  		<property name="locations">
+  			<list>
+  				<!-- platform -->
+  				<value>classpath:resources/env/platform.properties</value>
+  				<value>classpath:resources/platform/env/pl_service.properties</value>
+  				<value>classpath:resources/platform/env/pl_test.properties</value>
+  				<!-- app -->
+  				<value>classpath:resources/env/appconfig.properties</value>
+  				<value>classpath:resources/env/context.properties</value>
+  				<value>classpath:resources/services/*/messages.properties</value>
+  				<value>classpath:resources/env/service.properties</value>
+  				<value>classpath:resources/env/platform_test.properties</value>
+  			</list>
+  		</property>
+  		<property name="ignoreResourceNotFound" value="true"/>
+  		<property name="fileEncoding" value="UTF-8"/>
+  		<property name="localOverride" value="true"/>
+	</bean>
+</beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dohko="http://www.dohko.cn/schema/dohko"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.dohko.cn/schema/dohko http://www.dohko.cn/schema/dohko.xsd">
+
+	<dohko:filter uri="/user/order/submit" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+			<dohko:param key="detailList" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="detailList" source="detailList" type="json"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/user/order/list" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.OrderMasterMapper"/>
+			<dohko:data key="method" value="queryLst"/>
+		</dohko:request>
+	</dohko:filter>
+
+	<dohko:filter uri="/user/order/info" service="core_execSimpleMapper">
+		<dohko:validate>
+			<dohko:param key="shopID" rule="required"/>
+		</dohko:validate>
+		<dohko:request>
+			<dohko:data key="mapper" value="com.dohko.app.blxq.mapper.OrderMasterMapper"/>
+			<dohko:data key="method" value="queryLst"/>
+		</dohko:request>
+	</dohko:filter>
+</beans>

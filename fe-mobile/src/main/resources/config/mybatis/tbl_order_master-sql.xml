@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dohko.app.blxq.mapper.OrderMasterMapper">
+	<insert id="add" parameterType="com.dohko.core.base.DataMap">
+		insert into tbl_order_master (
+<if test="itemID !=null">itemID,</if><if test="orderKey !=null">orderKey,</if><if test="shopCode !=null">shopCode,</if><if test="shopName !=null">shopName,</if><if test="userID !=null">userID,</if><if test="userName !=null">userName,</if><if test="receiverName !=null">receiverName,</if><if test="deliveryName !=null">deliveryName,</if><if test="deliveryTime !=null">deliveryTime,</if><if test="receiverTime !=null">receiverTime,</if><if test="orderTotal !=null">orderTotal,</if><if test="goodTotal !=null">goodTotal,</if><if test="payType !=null">payType,</if><if test="action !=null">action,</if><if test="actionTime !=null">actionTime,</if><if test="createTime !=null">createTime</if>
+		) values (
+<if test="itemID !=null">#{itemID},</if><if test="orderKey !=null">#{orderKey},</if><if test="shopCode !=null">#{shopCode},</if><if test="shopName !=null">#{shopName},</if><if test="userID !=null">#{userID},</if><if test="userName !=null">#{userName},</if><if test="receiverName !=null">#{receiverName},</if><if test="deliveryName !=null">#{deliveryName},</if><if test="deliveryTime !=null">#{deliveryTime},</if><if test="receiverTime !=null">#{receiverTime},</if><if test="orderTotal !=null">#{orderTotal},</if><if test="goodTotal !=null">#{goodTotal},</if><if test="payType !=null">#{payType},</if><if test="action !=null">#{action},</if><if test="actionTime !=null">#{actionTime},</if><if test="createTime !=null">#{createTime}</if>
+		)
+	</insert>
+
+	<update id="update" parameterType="com.dohko.core.base.DataMap">
+		update tbl_order_master set 
+<if test="itemID !=null">itemID=#{itemID},</if><if test="orderKey !=null">orderKey=#{orderKey},</if><if test="shopCode !=null">shopCode=#{shopCode},</if><if test="shopName !=null">shopName=#{shopName},</if><if test="userID !=null">userID=#{userID},</if><if test="userName !=null">userName=#{userName},</if><if test="receiverName !=null">receiverName=#{receiverName},</if><if test="deliveryName !=null">deliveryName=#{deliveryName},</if><if test="deliveryTime !=null">deliveryTime=#{deliveryTime},</if><if test="receiverTime !=null">receiverTime=#{receiverTime},</if><if test="orderTotal !=null">orderTotal=#{orderTotal},</if><if test="goodTotal !=null">goodTotal=#{goodTotal},</if><if test="payType !=null">payType=#{payType},</if><if test="action !=null">action=#{action},</if><if test="actionTime !=null">actionTime=#{actionTime},</if><if test="createTime !=null">createTime=#{createTime}</if>
+	</update>
+	
+	<select id="queryByOrderCode" parameterType="java.lang.String" resultType="com.dohko.core.base.DataMap">
+		select 
+		<include refid="queryFieldSql"/>
+		from tbl_order_master
+		where OrderCode = #{OrderCode}
+	</select>
+
+	<select id="queryLst" parameterType="com.dohko.core.base.DataMap" resultType="com.dohko.core.base.DataMap">
+		select 
+		<include refid="queryFieldSql"/>
+		from tbl_order_master
+		<include refid="queryWhereSql"/>
+		<if test="pageOffset != null and pageSize != null">LIMIT #{pageOffset}, #{pageSize}</if>
+	</select>
+
+	<select id="queryCount" parameterType="com.dohko.core.base.DataMap" resultType="java.lang.Integer">
+		select count(*) from tbl_order_master
+		<include refid="queryWhereSql"/>
+	</select>
+
+	<select id="genOrderKey" resultType="java.lang.String" parameterType="java.lang.String">
+		select nextval(#{dateTime});
+	</select>
+
+	<sql id="queryWhereSql">
+	</sql>
+
+	<sql id="queryFieldSql">
+ itemID,  orderKey,  shopCode,  shopName,  userID,  userName,  receiverName,  deliveryName,  deliveryTime,  receiverTime,   orderTotal,  goodTotal,  payType,  action,  actionTime,  createTime
+	</sql>
+</mapper>

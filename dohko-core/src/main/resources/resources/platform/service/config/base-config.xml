@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+  	
+  	<context:component-scan base-package="com.dld" name-generator="com.dld.platform.service.annotation.extend.BeanNameGenerator"/>
+
+	<bean id="platform_ognlRequest" class="com.dld.platform.ognl.ognls.OgnlRequestEvaluator"></bean>
+	<bean id="platform_ognlRequestResponse" class="com.dld.platform.ognl.ognls.OgnlContextEvaluator"></bean>
+	<bean id="platform_ognlXPath" class="com.dld.platform.ognl.ognls.OgnlXPathEvaluator"></bean>
+	<bean id="platform_xpathsingle" class="com.dld.platform.xpath.xpaths.XPathSingleEvaluator" p:functions-ref="platform_xpathFunctions"></bean>
+	<bean id="platform_xpath" class="com.dld.platform.xpath.xpaths.XPathListEvaluator" p:functions-ref="platform_xpathFunctions"></bean>
+	
+	<bean id="platform_xpathFunctions" class="com.dld.platform.xpath.support.XPathFunctionsSupport">
+		<property name="classFunctions">
+			<map>
+				<entry key="com.dld.hualala.util.DateFunctions" value="date"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean class="com.dld.platform.service.support.ServiceInitializationProcessor"/>
+	
+	<bean id="platform_validatorInterceptor" class="com.dld.platform.service.aop.interceptor.ValidatorInterceptor" p:serviceValidator-ref="serviceValidator"></bean>
+    <bean id="platform_exceptionInterceptor" class="com.dld.platform.service.aop.interceptor.ExceptionInterceptor"></bean>
+	
+	<bean id="serviceValidator" class="com.dld.platform.service.validator.support.ServiceParamsValidatorSupport" init-method="init"/>
+	
+	<bean id="platform_nativeClientApp" class="com.dld.platform.service.nativeclient.NativeServiceClient">
+		<property name="component" ref="platform_component"></property>
+	</bean>
+	
+	<bean id="platform_serviceLock" class="com.dld.platform.service.lock.support.RedisServiceLock"/>
+	
+	<bean id="platform_lockReleaseInterceptor" class="com.dld.platform.service.aop.interceptor.LockReleaseInterceptor" p:serviceLock-ref="platform_serviceLock"/>
+	
+	<bean id="platform_responsePreProcess" class="com.dld.platform.service.esb.support.ResponsePreProcessSupport"/>
+</beans>

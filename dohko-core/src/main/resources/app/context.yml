@@ -1,0 +1,4 @@
+datasource:
+    url: jdbc:mysql://localhost/test
+service:
+    port: 50000

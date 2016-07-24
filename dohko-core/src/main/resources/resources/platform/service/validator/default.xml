@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validators>
+    <validator name="required" class="com.dld.platform.validator.validators.RequiredFieldValidator"/>
+    <validator name="requiredstring" class="com.dld.platform.validator.validators.RequiredStringValidator"/>
+    <validator name="requiredint" class="com.dld.platform.validator.validators.RequiredIntValidator"/>
+    <validator name="requireddecimal" class="com.dld.platform.validator.validators.RequiredDecimalValidator"/>
+    <validator name="requireddate" class="com.dld.platform.validator.validators.RequiredDateValidator"/>
+    <validator name="int" class="com.dld.platform.validator.validators.IntRangeFieldValidator"/>
+    <validator name="long" class="com.dld.platform.validator.validators.LongRangeFieldValidator"/>
+    <validator name="short" class="com.dld.platform.validator.validators.ShortRangeFieldValidator"/>
+    <validator name="double" class="com.dld.platform.validator.validators.DoubleRangeFieldValidator"/>
+    <validator name="date" class="com.dld.platform.validator.validators.DateRangeFieldValidator"/>    
+    <validator name="email" class="com.dld.platform.validator.validators.EmailValidator"/>
+    <validator name="mobile" class="com.dld.platform.validator.validators.MobileValidator"/>
+    <validator name="stringlength" class="com.dld.platform.validator.validators.StringLengthFieldValidator"/>
+    <validator name="regex" class="com.dld.platform.validator.validators.RegexFieldValidator"/>
+</validators>

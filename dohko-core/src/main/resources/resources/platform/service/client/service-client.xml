@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 	
+	<bean id="platform_serviceClientApp" class="com.dld.platform.service.client.ServiceRequestSupport">
+		<property name="urlname" value="service_client_request"></property>
+		<property name="requestDest" value="${platform.mb.dest.request}"/>
+		<property name="responseDest" value="${platform.service.dest.response}"/>
+		<property name="terminalName" value="${platform.service.terminal.name}"/>
+		<property name="terminalType" value="${platform.service.terminal.type}"/>
+		<property name="contextFactory" ref="platform_asyncContextFactory"/>
+	</bean>
+	
+	<bean id="platform_asyncContextFactory" class="com.dld.platform.client.async.AsyncContextFactorySupport"/>
+	
+	<bean id="platform_serviceCompositeProcess" class="com.dld.platform.service.client.ServiceResponseSupport" p:contextFactory-ref="platform_asyncContextFactory"/>
+	
+	<bean id="platform_servicePreProcess" class="com.dld.platform.service.mb.transformer.ServiceStringRequest">
+		<property name="terminalType" value="${platform.service.terminal.type}"/>
+		<property name="terminalName" value="${platform.service.terminal.name}"/>
+	</bean>
+	<bean id="platform_servicePostProcess" class="com.dld.platform.service.mb.transformer.ServiceStringResponse">
+		<property name="terminalType" value="${platform.service.terminal.type}"/>
+		<property name="terminalName" value="${platform.service.terminal.name}"/>
+	</bean>
+	<bean id="platform_serviceResponseTrans" class="com.dld.platform.service.mb.transformer.ServiceResponseTrans">
+		<property name="terminalType" value="${platform.service.terminal.type}"/>
+		<property name="terminalName" value="${platform.service.terminal.name}"/>
+	</bean>
+	<bean id="platform_serviceEventTrans" class="com.dld.platform.service.mb.transformer.ServiceEventTrans">
+		<property name="terminalType" value="${platform.service.terminal.type}"/>
+		<property name="terminalName" value="${platform.service.terminal.name}"/>
+	</bean>
+	<bean id="platform_serviceRegistryTrans" class="com.dld.platform.service.mb.transformer.ServiceRegistryTransformer">
+		<property name="terminalType" value="${platform.service.terminal.type}"/>
+		<property name="terminalName" value="${platform.service.terminal.name}"/>
+		<property name="reqDest" value="${platform.service.dest.request}"/>
+		<property name="resDest" value="${platform.service.dest.response}"/>
+	</bean>
+	
+	<bean id="platform_serviceResponseFilter" class="com.dld.platform.service.mb.filter.ServiceResponseFilter"/>
+	<bean id="platform_serviceEventFilter" class="com.dld.platform.service.mb.filter.ServiceEventFilter"/>
+	
+	<bean id="platform_serviceRegistryProcess" class="com.dld.platform.service.mb.support.ServiceRegistry">
+		<property name="prefixName" value="${platform.service.name.prefix}"/>
+	</bean>
+	
+	<bean id="platform_serviceExceptionProcess" class="com.dld.platform.service.esb.exception.ServiceMessagingExceptionHandler"/>
+</beans>
